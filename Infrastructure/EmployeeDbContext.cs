@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using UVS_Assignment.Infrastructure.Interfaces;
-using UVS_Assignment.Models;
+using UVS_Assignment.Entities;
 
 namespace UVS_Assignment.Infrastructure
 {

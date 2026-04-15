@@ -1,6 +1,6 @@
-﻿namespace UVS_Assignment.Models
+﻿namespace UVS_Assignment.Cli.Models
 {
-    public class SetEmployeeParsed
+    public class SetEmployeeCommand
     {
         public int EmployeeId { get; set; }
         public string EmployeeName { get; set; } = string.Empty;

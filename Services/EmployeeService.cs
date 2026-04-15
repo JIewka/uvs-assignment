@@ -1,5 +1,5 @@
-﻿using UVS_Assignment.Models;
-using UVS_Assignment.Services.Interfaces;
+﻿using UVS_Assignment.Dtos;
+using UVS_Assignment.Entities;
 
 namespace UVS_Assignment.Services
 {
@@ -12,14 +12,24 @@ namespace UVS_Assignment.Services
             _employeeRepository = employeeRepository;
         }
 
-        public async Task<Employee?> GetEmployeeAsync(int employeeId, CancellationToken cancellationToken = default)
+        public async Task<EmployeeDto?> GetEmployeeAsync(int employeeId, CancellationToken cancellationToken = default)
         {
             if (employeeId <= 0)
             {
-                throw new ArgumentException("Employee ID must be greater than zero.", nameof(employeeId));
+                throw new ArgumentException("Employee id should be greater than 0.", nameof(employeeId));
             }
 
-            return await _employeeRepository.GetEmployeeByIdAsync(employeeId, cancellationToken);
+            var employee = await _employeeRepository.GetEmployeeByIdAsync(employeeId, cancellationToken);
+
+            if (employee is null)
+                return null;
+
+            return new EmployeeDto
+            {
+                Id = employee.Id,
+                Name = employee.Name,
+                Salary = employee.Salary
+            };
         }
 
         public async Task SetEmployeeAsync(
@@ -29,24 +39,16 @@ namespace UVS_Assignment.Services
             CancellationToken cancellationToken = default)
         {
             if (employeeId <= 0)
-            {
-                throw new ArgumentException("Employee ID must be greater than zero.", nameof(employeeId));
-            }
+                throw new ArgumentException("Employee id should be greater than 0.", nameof(employeeId));
 
             if (string.IsNullOrWhiteSpace(employeeName))
-            {
                 throw new ArgumentException("Employee name is required.", nameof(employeeName));
-            }
 
             if (employeeName.Length > 128)
-            {
-                throw new ArgumentException("Employee name must not exceed 128 characters.", nameof(employeeName));
-            }
+                throw new ArgumentException("Employee name can not be longer than 128 chars.", nameof(employeeName));
 
             if (employeeSalary < 0)
-            {
-                throw new ArgumentException("Employee salary must not be negative.", nameof(employeeSalary));
-            }
+                throw new ArgumentException("Employee salary can not be negative.", nameof(employeeSalary));
 
             var existingEmployee = await _employeeRepository.GetEmployeeByIdAsync(employeeId, cancellationToken);
 

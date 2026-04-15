@@ -1,35 +1,34 @@
-﻿using UVS_Assignment.Enums;
-using UVS_Assignment.Models;
-using UVS_Assignment.Services.Interfaces;
+﻿using UVS_Assignment.Cli.Enums;
+using UVS_Assignment.Cli.Models;
 
-namespace UVS_Assignment.Services
+namespace UVS_Assignment.Cli
 {
-    public class ParsingService : IParsingService
+    public class CommandParser : ICommandParser
     {
-        public ParsedAction Parse(string[] args)
+        public ParsedCommand Parse(string[] args)
         {
             if (args.Length == 0)
             {
-                throw new ArgumentException("No action provided.");
+                throw new ArgumentException("No command provided.");
             }
 
-            var action = args[0];
+            var command = args[0];
 
-            return action switch
+            return command switch
             {
-                "get-employee" => new ParsedAction
+                "get-employee" => new ParsedCommand
                 {
-                    ActionType = ActionType.GET_EMPLOYEE,
-                    GetEmployeeParsed = new GetEmployeeParsed
+                    CommandType = CommandType.GET_EMPLOYEE,
+                    GetEmployeeCommand = new GetEmployeeCommand
                     {
                         EmployeeId = GetIntValue(args, "--employeeId")
                     }
                 },
 
-                "set-employee" => new ParsedAction
+                "set-employee" => new ParsedCommand
                 {
-                    ActionType = ActionType.SET_EMPLOYEE,
-                    SetEmployeeParsed = new SetEmployeeParsed
+                    CommandType = CommandType.SET_EMPLOYEE,
+                    SetEmployeeCommand = new SetEmployeeCommand
                     {
                         EmployeeId = GetIntValue(args, "--employeeId"),
                         EmployeeName = GetStringValue(args, "--employeeName"),
@@ -37,7 +36,7 @@ namespace UVS_Assignment.Services
                     }
                 },
 
-                _ => throw new ArgumentException($"Unknown action: {action}")
+                _ => throw new ArgumentException($"Unknown command: {command}")
             };
         }
 
@@ -47,7 +46,7 @@ namespace UVS_Assignment.Services
 
             if (index < 0 || index + 1 >= args.Length)
             {
-                throw new ArgumentException($"Missing required argument: {argumentName}");
+                throw new ArgumentException($"Missing argument: {argumentName}");
             }
 
             return args[index + 1];
@@ -59,7 +58,7 @@ namespace UVS_Assignment.Services
 
             if (!int.TryParse(value, out var result))
             {
-                throw new ArgumentException($"Argument {argumentName} must be a valid integer.");
+                throw new ArgumentException($"Argument {argumentName} must be an integer.");
             }
 
             return result;

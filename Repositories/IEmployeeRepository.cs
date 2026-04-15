@@ -1,4 +1,4 @@
-﻿using UVS_Assignment.Models;
+﻿using UVS_Assignment.Entities;
 
 public interface IEmployeeRepository
 {

@@ -1,6 +1,6 @@
-﻿namespace UVS_Assignment.Enums
+﻿namespace UVS_Assignment.Cli.Enums
 {
-    public enum ActionType
+    public enum CommandType
     { 
         GET_EMPLOYEE,
         SET_EMPLOYEE,

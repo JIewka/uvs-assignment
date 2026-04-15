@@ -1,5 +1,4 @@
-﻿
-namespace UVS_Assignment.Models
+﻿namespace UVS_Assignment.Entities
 {
     public class Employee
     {
