@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UVS_Assignment.Dtos
+﻿namespace UVS_Assignment.Dtos
 {
     public class EmployeeDto
     {

@@ -19,23 +19,19 @@ namespace UVS_Assignment.Repositories
                 .FirstOrDefaultAsync(e => e.Id == employeeId, cancellationToken);
         }
 
-        public async Task<bool> CheckIfExistsAsync(int employeeId, CancellationToken cancellationToken = default)
-        {
-            return await _context.Employees
-                .AnyAsync(e => e.Id == employeeId, cancellationToken);
-        }
-
         public async Task AddEmployeeAsync(Employee employee, CancellationToken cancellationToken = default)
         {
             await _context.Employees.AddAsync(employee, cancellationToken);
+            await SaveChangesAsync(cancellationToken);
         }
 
-        public void UpdateEmployee(Employee employee)
+        public async Task UpdateEmployee(Employee employee, CancellationToken cancellationToken = default)
         {
             _context.Employees.Update(employee);
+            await SaveChangesAsync(cancellationToken);
         }
 
-        public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
+        private async Task  SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             await _context.SaveChangesAsync(cancellationToken);
         }

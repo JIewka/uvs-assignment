@@ -20,9 +20,7 @@ namespace UVS_Assignment.Cli
         {
             if (args.Length == 0)
             {
-                Console.WriteLine("Usage:");
-                Console.WriteLine("  set-employee --employeeId <id> --employeeName <name> --employeeSalary <salary>");
-                Console.WriteLine("  get-employee --employeeId <id>");
+                PrintPossibleCommands();
                 return;
             }
 
@@ -33,7 +31,7 @@ namespace UVS_Assignment.Cli
                 case CommandType.GET_EMPLOYEE:
                     {
                         var command = parsedAction.GetEmployeeCommand
-                            ?? throw new InvalidOperationException("Get employee action was not parsed.");
+                            ?? throw new InvalidOperationException("Get employee command was not parsed.");
 
                         var employee = await _employeeService.GetEmployeeAsync(command.EmployeeId);
 
@@ -52,7 +50,7 @@ namespace UVS_Assignment.Cli
                 case CommandType.SET_EMPLOYEE:
                     {
                         var command = parsedAction.SetEmployeeCommand
-                            ?? throw new InvalidOperationException("Set employee action was not parsed.");
+                            ?? throw new InvalidOperationException("Set employee command was not parsed.");
 
                         await _employeeService.SetEmployeeAsync(
                             command.EmployeeId,
@@ -64,9 +62,17 @@ namespace UVS_Assignment.Cli
                     }
 
                 default:
-                    Console.WriteLine("Unknown action.");
+                    Console.WriteLine("Command is unknown.");
+                    PrintPossibleCommands();
                     break;
             }
+        }
+
+        private static void PrintPossibleCommands()
+        {
+            Console.WriteLine("Possible commands:");
+            Console.WriteLine("set-employee --employeeId <id> --employeeName <name> --employeeSalary <salary>");
+            Console.WriteLine("get-employee --employeeId <id>");
         }
     }
 }

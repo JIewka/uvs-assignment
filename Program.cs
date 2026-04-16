@@ -36,6 +36,7 @@ try
 }
 catch (Exception ex)
 {
-    Console.WriteLine("Error occurred:");
-    Console.WriteLine(ex.Message);
+    Console.Error.WriteLine("Error occurred:");
+    Console.Error.WriteLine(ex.Message);
+    Environment.ExitCode = 1;
 }

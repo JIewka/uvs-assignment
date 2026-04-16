@@ -1,5 +1,4 @@
 ﻿using UVS_Assignment.Dtos;
-using UVS_Assignment.Entities;
 
 namespace UVS_Assignment.Services
 {

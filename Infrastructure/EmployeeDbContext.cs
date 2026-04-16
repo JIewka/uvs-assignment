@@ -22,7 +22,7 @@ namespace UVS_Assignment.Infrastructure
 
                 entity.Property(e => e.Id)
                     .HasColumnName("employeeid")
-                    .ValueGeneratedNever(); // important for EF Core 6
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.Name)
                     .HasColumnName("employeename")
