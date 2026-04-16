@@ -47,3 +47,5 @@ dotnet run --no-build -- get-employee --employeeId 1
 The database schema was adjusted slightly from the original version. A primary key constraint was added to
 `employeeId`, while the application still requires the caller to provide the employeeId explicitly.
 This keeps the command contract unchanged and enforces uniqueness at the database level.
+
+The PowerShell scripts were adjusted slightly to match the current directory structure and setup flow.

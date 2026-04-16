@@ -48,7 +48,7 @@ namespace UVS_Assignment.Cli
                 var arg = args[i];
 
                 if (!arg.StartsWith("--", StringComparison.Ordinal))
-                    throw new ArgumentException($"Unexpected argument: {arg}");
+                    throw new ArgumentException($"Unknown argument: {arg}");
 
                 if (parsedArgs.ContainsKey(arg))
                     throw new ArgumentException($"Duplicate argument: {arg}");
