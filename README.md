@@ -15,7 +15,6 @@ and apply the dbSchema:
 cd .\UVS_Assignment\Scripts
 .\setUpDatabase.ps1
 ```
-Run the docker container. 
 
 ## Testing the Application
 
